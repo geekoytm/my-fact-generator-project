@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Fun Facts</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .fact { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>My Fun Facts</h1>
+    <div id="facts"></div>
+
+    <script>
+        fetch('/api/facts')
+            .then(response => response.json())
+            .then(data => {
+                const factsDiv = document.getElementById('facts');
+                data.forEach(fact => {
+                    const factElement = document.createElement('div');
+                    factElement.className = 'fact';
+                    factElement.textContent = fact;
+                    factsDiv.appendChild(factElement);
+                });
+            })
+            .catch(error => console.error('Error fetching facts:', error));
+    </script>
+</body>
+</html>
